@@ -4,13 +4,13 @@ import { Button, Form, Label } from './ContactForm.styled';
 import { addContact } from '../../redux/contactSlice';
 // import { selectContacts } from '../../redux/selectors';
 import { nanoid } from '@reduxjs/toolkit';
+import { selectContacts } from '../../redux/selectors';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.contact);
-  console.log(contacts);
+  const contacts = useSelector(selectContacts);
 
   const handleChange = e => {
     switch (e.target.name) {
@@ -48,7 +48,6 @@ export const ContactForm = () => {
 
   const checkContactNameRepeat = name => {
     const temporaryNameArray = contacts.map(item => item.name);
-    // console.log(temporaryNameArray);
     return temporaryNameArray.includes(name);
   };
   return (
