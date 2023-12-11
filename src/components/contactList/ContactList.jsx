@@ -1,29 +1,24 @@
-import PropTypes from 'prop-types';
 import { ItemContact } from 'components/Item/Item';
 import { Item, List } from './ContactList.styled';
+import { useSelector } from 'react-redux';
+import { selectContacts, selectFilter } from '../../redux/selectors';
 
-export const ContactList = ({ visibleContacts, deleteContact }) => {
-  return (<>   
-  <List>
-      {visibleContacts.map(currentContact => (
-        <Item key={currentContact.id}>
-          <ItemContact
-            deleteContact={deleteContact}
-            currentContact={currentContact}
-          />
-        </Item>
-      ))}
-    </List>
-</>
+export const ContactList = () => {
+  const contacts = useSelector(selectContacts);
+  const filter = useSelector(selectFilter).toLowerCase();
+  const visualContact = contacts.filter(({ name }) =>
+    name.toLowerCase().includes(filter)
   );
-};
-ContactList.propTypes = {
-  visibleContacts: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
-  deleteContact: PropTypes.func.isRequired,
+  return (
+    <>
+      <List>
+        {contacts &&
+          visualContact.map(currentContact => (
+            <Item key={currentContact.id}>
+              <ItemContact currentContact={currentContact} />
+            </Item>
+          ))}
+      </List>
+    </>
+  );
 };

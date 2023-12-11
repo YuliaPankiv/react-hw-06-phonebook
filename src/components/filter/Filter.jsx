@@ -1,23 +1,24 @@
-import PropTypes from 'prop-types';
-import { Label } from './Filter.styled';
+import { useDispatch } from 'react-redux';
+import { TextField } from '@mui/material';
+// import { selectFilter } from '../../redux/selectors';
+import { filterValue } from '../../redux/filterSlice';
 
-const Filter = ({ filterValue, onChange }) => (
-  <>
-    <Label>
-      Find ny name
-      <input
-        type="text"
-        name="filter"
-        value={filterValue}
-        required
-        onChange={onChange}
-      />
-    </Label>
-  </>
-);
+const Filter = () => {
+  // const filter = useSelector(selectFilter);
+  const dispatch = useDispatch();
+
+  return (
+    <TextField
+      id="standard-basic"
+      label="Filter"
+      variant="standard"
+      name="filter"
+      // value={filter}
+      onChange={e => {
+        dispatch(filterValue(e.target.value));
+      }}
+    />
+  );
+};
 
 export default Filter;
-Filter.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  filterValue: PropTypes.string.isRequired,
-};

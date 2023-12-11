@@ -1,24 +1,19 @@
-import PropTypes from 'prop-types';
-import { SlUserUnfollow } from "react-icons/sl";
+import { SlUserUnfollow } from 'react-icons/sl';
 import { Delete } from 'components/contactList/ContactList.styled';
+import { deleteContact } from '../../redux/contactSlice';
+import { useDispatch } from 'react-redux';
 
-export const ItemContact = ({
-  currentContact: { id, name, number },
-  deleteContact,
-}) => (
-  <>
-    <p>
-      <span>{name}</span>: <span>{number}</span>
-    </p>
-    <Delete onClick={() => deleteContact(id)}><SlUserUnfollow /></Delete>
-  </>
-);
+export const ItemContact = ({ currentContact: { id, name, number } }) => {
+  const dispatch = useDispatch();
 
-ItemContact.propTypes = {
-  currentContact: PropTypes.exact({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    number: PropTypes.string.isRequired,
-  }).isRequired,
-  deleteContact: PropTypes.func.isRequired,
+  return (
+    <>
+      <p>
+        <span>{name}</span>: <span>{number}</span>
+      </p>
+      <Delete onClick={() => dispatch(deleteContact({ id }))}>
+        <SlUserUnfollow />
+      </Delete>
+    </>
+  );
 };
