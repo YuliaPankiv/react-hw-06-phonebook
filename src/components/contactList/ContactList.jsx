@@ -9,6 +9,7 @@ export const ContactList = () => {
   const visualContact = contacts.filter(({ name }) =>
     name.toLowerCase().includes(filter)
   );
+  console.log(contacts);
   return (
     <>
       <List>

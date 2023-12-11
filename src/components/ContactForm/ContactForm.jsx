@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Label } from './ContactForm.styled';
 import { addContact } from '../../redux/contactSlice';
 import { selectContacts } from '../../redux/selectors';
+import { nanoid } from '@reduxjs/toolkit';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
@@ -29,7 +30,7 @@ export const ContactForm = () => {
     contacts?.find(cont =>
       cont.name.toLowerCase() === name.toLowerCase()
         ? alert(`${name} is already in contacts list`)
-        : dispatch(addContact({ name, number }))
+        : dispatch(addContact({ name: name, number: number, id: nanoid() }))
     );
     setName('');
     setNumber('');
