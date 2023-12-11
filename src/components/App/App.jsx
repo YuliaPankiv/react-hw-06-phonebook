@@ -5,14 +5,12 @@ import Filter from 'components/filter/Filter';
 
 const App = () => {
   return (
-    <>
-      <Container sx={{ mt: '1rem' }}>
-        <h1>Phone book</h1>
-        <ContactForm />
-        <Filter />
-        <ContactList />
-      </Container>
-    </>
+    <Container>
+      <h1>Phone book</h1>
+      <ContactForm />
+      <Filter />
+      <ContactList />
+    </Container>
   );
 };
 export default App;
