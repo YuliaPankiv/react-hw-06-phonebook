@@ -1,8 +1,8 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit';
-
+import data from '../startContacts.json';
 const contactSlice = createSlice({
   name: 'contacts',
-  initialState: { contact: [] },
+  initialState: { contact: data },
   reducers: {
     addContact: {
       prepare: contact => {
