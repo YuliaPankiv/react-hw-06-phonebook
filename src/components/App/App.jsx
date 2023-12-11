@@ -1,7 +1,8 @@
-import { ContactList } from 'components/contactList/ContactList';
 import { Container } from '@mui/material';
-import { ContactForm } from 'components/ContactForm/ContactForm';
-import Filter from 'components/filter/Filter';
+import { ContactList } from '../contactList/ContactList';
+
+import { ContactForm } from '../ContactForm/ContactForm';
+import Filter from '../filter/Filter';
 
 const App = () => {
   return (
