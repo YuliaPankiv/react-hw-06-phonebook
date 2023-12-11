@@ -1,22 +1,20 @@
 import { ItemContact } from 'components/Item/Item';
 import { Item, List } from './ContactList.styled';
-import { useSelector } from 'react-redux';
 import { selectFilter } from '../../redux/selectors';
+import { useSelector } from 'react-redux';
 
 export const ContactList = () => {
   const contacts = useSelector(state => state.contacts.contact);
-  debugger;
   const filter = useSelector(selectFilter).toLowerCase();
-  console.log(filter);
-  const visualContact = contacts.filter(({ name }) =>
-    name.toLowerCase().includes(filter)
+  const filteredContacts = contacts.filter(item =>
+    item.name.toLowerCase().includes(filter.toLowerCase().trim())
   );
   console.log(contacts);
   return (
     <>
       <List>
         {contacts &&
-          visualContact.map(currentContact => (
+          filteredContacts.map(currentContact => (
             <Item key={currentContact.id}>
               <ItemContact currentContact={currentContact} />
             </Item>

@@ -8,9 +8,9 @@ import { nanoid } from '@reduxjs/toolkit';
 export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const dispatch = useDispatch();
   const contacts = useSelector(state => state.contacts.contact);
   console.log(contacts);
-  const dispatch = useDispatch();
 
   const handleChange = e => {
     switch (e.target.name) {
@@ -28,13 +28,28 @@ export const ContactForm = () => {
 
   const handleOnSubmit = e => {
     e.preventDefault();
-    contacts?.find(cont =>
-      cont.name.toLowerCase() === name.toLowerCase()
-        ? alert(`${name} is already in contacts list`)
-        : dispatch(addContact({ name: name, number: number, id: nanoid() }))
-    );
+    const newContact = {
+      id: nanoid(3),
+      name,
+      number,
+    };
+    if (checkContactNameRepeat(name)) {
+      alert(`${name} already exists`);
+    } else {
+      dispatch(addContact(newContact));
+    }
+
+    resetState();
+  };
+  const resetState = () => {
     setName('');
     setNumber('');
+  };
+
+  const checkContactNameRepeat = name => {
+    const temporaryNameArray = contacts.map(item => item.name);
+    // console.log(temporaryNameArray);
+    return temporaryNameArray.includes(name);
   };
   return (
     <Form onSubmit={handleOnSubmit}>
