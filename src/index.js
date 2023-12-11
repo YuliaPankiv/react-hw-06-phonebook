@@ -8,7 +8,7 @@ import App from 'components/App/App';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Provider loading={null} store={store}>
+    <Provider store={store}>
       <PersistGate persistor={persistor}>
         <App />
       </PersistGate>
