@@ -12,7 +12,6 @@ import {
 } from 'redux-persist';
 import contactsReducer from './contactSlice';
 import { filterReducer } from './filterSlice';
-
 const persistConfig = {
   key: 'contacts',
   storage,
@@ -31,7 +30,6 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
-  // devTools: process.env.NODE_ENV !== 'production',
 });
 
 export const persistor = persistStore(store);

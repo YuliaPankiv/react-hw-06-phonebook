@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Label } from './ContactForm.styled';
 import { addContact } from '../../redux/contactSlice';
-// import { selectContacts } from '../../redux/selectors';
 import { nanoid } from '@reduxjs/toolkit';
 import { selectContacts } from '../../redux/selectors';
 
@@ -47,8 +46,8 @@ export const ContactForm = () => {
   };
 
   const checkContactNameRepeat = name => {
-    const temporaryNameArray = contacts.map(item => item.name);
-    return temporaryNameArray.includes(name);
+    const temporaryNameArray = contacts.map(item => item.name.toLowerCase());
+    return temporaryNameArray.includes(name.toLowerCase());
   };
   return (
     <Form onSubmit={handleOnSubmit}>
